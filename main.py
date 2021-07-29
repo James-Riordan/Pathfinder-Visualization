@@ -7,16 +7,17 @@ WIDTH = 1000
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* Path Finding Algorithm")
 
-RED = (255, 0, 0)
+TURQUOISE = (49, 153, 186)
+WHITE = (233, 233, 233)
 GREEN = (0, 255, 0)
-BLUE = (0, 255, 0)
 YELLOW = (255, 255, 0)
-WHITE = (255, 255, 255)
+DARK = (66, 66, 66)
+GREY = (188, 188, 188)
 BLACK = (0, 0, 0)
-PURPLE = (128, 0, 128)
-ORANGE = (255, 165 ,0)
+ORANGE = (255, 153, 0)
 GREY = (128, 128, 128)
-TURQUOISE = (64, 224, 208)
+GREEN2 = (152, 255, 152)
+RED2 = (255,61,65)
 
 class Spot:
 	def __init__(self, row, col, width, total_rows): 
@@ -24,7 +25,7 @@ class Spot:
 		self.col = col
 		self.x = row * width
 		self.y = col * width
-		self.color = WHITE
+		self.color = DARK
 		self.neighbors = []
 		self.width = width
 		self.total_rows = total_rows
@@ -33,40 +34,46 @@ class Spot:
 		return self.row, self.col
 
 	def is_closed(self):
-		return self.color == RED
+		return self.color == TURQUOISE
 
 	def is_open(self):
-		return self.color == GREEN
+		return self.color == WHITE
 
 	def is_barrier(self):
 		return self.color == BLACK
 
 	def is_start(self):
-		return self.color == ORANGE
+		return self.color == GREEN2
 
 	def is_end(self):
-		return self.color == TURQUOISE
+		return self.color == RED2
+
+	def is_orange(self): 
+		return self.color == ORANGE
 
 	def reset(self):
-		self.color = WHITE
+		self.color = GREY
 
 	def make_start(self):
-		self.color = ORANGE
+		self.color = GREEN2
 
 	def make_closed(self):
-		self.color = RED
+		self.color = TURQUOISE
 
 	def make_open(self):
-		self.color = GREEN
+		self.color = WHITE
 
 	def make_barrier(self):
 		self.color = BLACK
 
 	def make_end(self):
-		self.color = TURQUOISE
+		self.color = RED2
 
 	def make_path(self):
-		self.color = PURPLE
+		self.color = ORANGE
+
+	def make_orange(self):
+		self.color = ORANGE
 
 	def draw(self, win):
 		pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
@@ -124,7 +131,7 @@ def algorithm(draw, grid, start, end):
 
 		if current == end:
 			reconstruct_path(came_from, end, draw)
-			end.make_end()
+			end.make_orange()
 			return True
 
 		for neighbor in current.neighbors:
@@ -169,7 +176,7 @@ def draw_grid(win, rows, width):
 
 
 def draw(win, grid, rows, width):
-	win.fill(WHITE)
+	win.fill(DARK)
 
 	for row in grid:
 		for spot in row:
