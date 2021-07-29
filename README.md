@@ -8,6 +8,5 @@ Instructions:
 4. Click/hold to draw the maze (BLACK)
 5. Spacebar to start
 
-Demo:
 ![](github-images/PathfinderDemo.gif)
 
