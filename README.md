@@ -9,5 +9,5 @@ Instructions:
 5. Spacebar to start
 
 Demo:
-PathfinderDemo.mov
+![](github-images/PathfinderDemo.gif)
 
